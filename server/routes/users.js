@@ -5,7 +5,8 @@ const router = express.Router();
 // 模擬資料庫中的使用者資料
 const users = [
   { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' }
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Cypress'}
 ];
 
 // GET /api/users - 取得所有使用者
