@@ -11,6 +11,10 @@ app.get('/', (req, res) => {
   res.send('伺服器運行中 🚀');
 });
 
+app.get('/easter_egg', (req, res) => {
+    res.send('🥚🐇');
+});
+
 // 掛載 users 路由（稍後建立）
 const usersRouter = require('./routes/users');
 app.use('/api/users', usersRouter);
