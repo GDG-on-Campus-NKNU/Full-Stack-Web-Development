@@ -23,3 +23,5 @@ Thumbs.db
 
 # 覆蓋測試報告 (可選)
 coverage/
+
+.vscode
