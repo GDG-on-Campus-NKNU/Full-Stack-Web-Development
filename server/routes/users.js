@@ -3,13 +3,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 
-// 模擬資料庫中的使用者資料
-const users = [
-  { id: 1, name: 'Alice' },
-  { id: 2, name: 'Bob' },
-  { id: 3, name: 'Cypress'}
-];
-
 // GET /api/users - 取得所有使用者
 router.get('/', async (req, res) => {
   try {
@@ -35,6 +28,8 @@ router.post('/', async (req, res) => {
   res.status(201).json({ id: result.insertId, name, email });
 });
 
+module.exports = router;
+
 // // PUT /api/users/:id - 修改使用者
 // router.put('/:id', (req, res) => {
 //   const id = Number(req.params.id);
@@ -57,5 +52,3 @@ router.post('/', async (req, res) => {
 //   users.splice(index, 1);
 //   res.status(204).json();
 // });
-
-module.exports = router;
