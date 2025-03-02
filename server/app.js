@@ -15,9 +15,14 @@ app.get('/easter_egg', (req, res) => {
     res.send('🥚🐇');
 });
 
-// 掛載 users 路由（稍後建立）
+// 掛載路由
 const usersRouter = require('./routes/users');
+const servicesRouter = require('./routes/services');
+const ordersRouter = require('./routes/orders');
+
 app.use('/api/users', usersRouter);
+app.use('/api/services', servicesRouter);
+app.use('/api/orders', ordersRouter);
 
 app.listen(port, () => {
   console.log(`伺服器啟動：http://localhost:${port}`);
