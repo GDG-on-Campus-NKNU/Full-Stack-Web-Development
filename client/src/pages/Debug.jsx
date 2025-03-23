@@ -13,7 +13,7 @@ function Debug() {
   }, []);
 
   return (
-    <div className="p-6 space-y-6">
+    <div className="max-w-2xl mx-auto p-6 bg-gray-50 rounded shadow space-y-6">
       <section>
         <h2 className="text-xl font-bold">客戶</h2>
         <ul className="list-disc ml-5">
