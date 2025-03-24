@@ -3,8 +3,8 @@ function EntityCard({ type, data }) {
       case "users":
         return (
           <div className="border rounded p-4">
-            <h2 className="font-bold">{data.name}</h2>
-            <p className="text-gray-600">{data.email}</p>
+            <h2 className="font-bold">名稱: {data.name}</h2>
+            <p className="text-gray-600">電子郵件: {data.email}</p>
           </div>
         );
       case "services":
@@ -16,11 +16,22 @@ function EntityCard({ type, data }) {
           </div>
         );
       case "orders":
+        var date = new Date(data.order_date);
+        var options = { 
+          timeZone: 'UTC', 
+          month: 'long', 
+          day: 'numeric', 
+          year: 'numeric', 
+          hour: 'numeric', 
+          minute: 'numeric', 
+          hour12: true 
+        };
+
         return (
           <div className="border rounded p-4">
             <p>使用者：{data.user}</p>
             <p>服務：{data.service}</p>
-            <p className="text-sm text-gray-500">{data.order_date}</p>
+            <p className="text-sm text-gray-500">{date.toLocaleDateString('en-US', options)}</p>
           </div>
         );
       default:
