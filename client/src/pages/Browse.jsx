@@ -58,7 +58,7 @@ function Browse() {
       case "orders":
         return (
           <>
-            <input placeholder="使用者" type="number" value={form.user || ""} onChange={e => setForm({ ...form, user: e.target.value })} className="input" />
+            <input placeholder="使用者 ID" type="number" value={form.user || ""} onChange={e => setForm({ ...form, user: e.target.value })} className="input" />
             <input placeholder="服務" type="number" value={form.service || ""} onChange={e => setForm({ ...form, service: e.target.value })} className="input" />
           </>
         );
