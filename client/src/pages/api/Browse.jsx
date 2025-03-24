@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import EntityCard from "../components/EntityCard";
+import EntityCard from "../../components/EntityCard";
 
 const API_MAP = {
   users: "/api/users",
@@ -43,8 +43,8 @@ function Browse() {
       case "users":
         return (
           <>
-            <input placeholder="Name" value={form.name || ""} onChange={e => setForm({ ...form, name: e.target.value })} className="input" />
-            <input placeholder="Email" value={form.email || ""} onChange={e => setForm({ ...form, email: e.target.value })} className="input" />
+            <input placeholder="名稱" value={form.name || ""} onChange={e => setForm({ ...form, name: e.target.value })} className="input" />
+            <input placeholder="電子郵件" value={form.email || ""} onChange={e => setForm({ ...form, email: e.target.value })} className="input" />
           </>
         );
       case "services":
