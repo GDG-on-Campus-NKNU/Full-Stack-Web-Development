@@ -2,14 +2,11 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="max-w-md mx-auto p-8 bg-white rounded-lg shadow-md text-center">
-      <h1 className="text-2xl font-bold mb-6">歡迎來到網頁的前端!</h1>
-      
-      <Link 
-        to="/login" 
-        className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-md transition duration-200 shadow-sm">
-        前往登入
-      </Link>
+    <div className="p-6 space-y-3 text-center">
+      <h1 className="text-2xl font-bold mb-4">資料表預覽</h1>
+      <Link to="/browse/users" className="block text-blue-600 underline">使用者資料</Link>
+      <Link to="/browse/services" className="block text-blue-600 underline">服務資料</Link>
+      <Link to="/browse/orders" className="block text-blue-600 underline">訂單資料</Link>
     </div>
   );
 }
