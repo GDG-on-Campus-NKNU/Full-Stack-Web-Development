@@ -43,23 +43,30 @@ function Browse() {
       case "users":
         return (
           <>
-            <input placeholder="名稱" value={form.name || ""} onChange={e => setForm({ ...form, name: e.target.value })} className="input" />
-            <input placeholder="電子郵件" value={form.email || ""} onChange={e => setForm({ ...form, email: e.target.value })} className="input" />
+            <input placeholder="名稱" value={form.name || ""} 
+            onChange={e => setForm({ ...form, name: e.target.value })} className="input" />
+            <input placeholder="電子郵件" value={form.email || ""} 
+            onChange={e => setForm({ ...form, email: e.target.value })} className="input" />
           </>
         );
       case "services":
         return (
           <>
-            <input placeholder="名稱" value={form.name || ""} onChange={e => setForm({ ...form, name: e.target.value })} className="input" />
-            <input placeholder="說明" value={form.description || ""} onChange={e => setForm({ ...form, description: e.target.value })} className="input" />
-            <input placeholder="價格" type="number" value={form.price || ""} onChange={e => setForm({ ...form, price: e.target.value })} className="input" />
+            <input placeholder="名稱" value={form.name || ""} 
+            onChange={e => setForm({ ...form, name: e.target.value })} className="input" />
+            <input placeholder="說明" value={form.description || ""} 
+            onChange={e => setForm({ ...form, description: e.target.value })} className="input" />
+            <input placeholder="價格" type="number" value={form.price || ""} 
+            onChange={e => setForm({ ...form, price: e.target.value })} className="input" />
           </>
         );
       case "orders":
         return (
           <>
-            <input placeholder="使用者 ID" type="number" value={form.user || ""} onChange={e => setForm({ ...form, user: e.target.value })} className="input" />
-            <input placeholder="服務" type="number" value={form.service || ""} onChange={e => setForm({ ...form, service: e.target.value })} className="input" />
+            <input placeholder="使用者 ID" type="number" value={form.user_id || ""} 
+            onChange={e => setForm({ ...form, user_id: e.target.value })} className="input" />
+            <input placeholder="服務 ID" type="number" value={form.service_id || ""} 
+            onChange={e => setForm({ ...form, service_id: e.target.value })} className="input" />
           </>
         );
       default:

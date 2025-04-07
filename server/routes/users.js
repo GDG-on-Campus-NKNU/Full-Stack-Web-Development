@@ -3,9 +3,10 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 const { addLog } = require('../utils/logger');
+const { verifyToken, requireAdmin } = require('../middlewares/auth');
 
 // GET /api/users - 取得所有使用者
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
   try {
       const [users] = await db.query('SELECT * FROM users');
       await addLog('INFO', 'users', 'Fetched all users');
@@ -17,7 +18,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/users - 新增使用者
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, requireAdmin, async (req, res) => {
   const { name, email } = req.body;
   if (!name || !email) {
     await addLog('WARNING', 'users', 'Attempted to create a user with missing fields');
@@ -35,7 +36,7 @@ router.post('/', async (req, res) => {
 });
 
 // PUT /api/users/:id - 修改使用者
-router.put('/:id', async (req, res) => {
+router.put('/:id', verifyToken, requireAdmin, async (req, res) => {
   const id = Number(req.params.id);
   if (isNaN(id)) {
     await addLog('WARNING', 'users', 'Attempted to update a user with invalid id');
@@ -63,7 +64,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE /api/users/:id - 刪除使用者
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verifyToken, requireAdmin, async (req, res) => {
   const id = Number(req.params.id);
   if (isNaN(id)) {
     await addLog('WARNING', 'users', 'Attempted to delete a user with invalid id');

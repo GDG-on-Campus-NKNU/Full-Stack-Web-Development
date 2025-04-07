@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const db = require('../config/db');
 const { addLog } = require('../utils/logger');
+const { verifyToken, requireAdmin } = require('../middlewares/auth');
 
 // GET /api/orders - 取得所有訂單
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
     try {
         const [orders] = await db.query(`
             SELECT users.name AS user, services.name AS service, orders.order_date
@@ -21,7 +22,7 @@ router.get('/', async (req, res) => {
 });
 
 // POST /api/orders - 新增訂單
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, requireAdmin, async (req, res) => {
     const { user_id, service_id } = req.body;
     if (!user_id || !service_id) {
         await addLog('WARNING', 'orders', 'Attempted to create an order with missing fields');
@@ -39,7 +40,7 @@ router.post('/', async (req, res) => {
 });
 
 // PUT /api/orders/:id - 修改訂單
-router.put('/:id', async (req, res) => {
+router.put('/:id', verifyToken, requireAdmin, async (req, res) => {
     const id = Number(req.params.id);
     if (isNaN(id)) {
         await addLog('WARNING', 'orders', 'Attempted to update an order with invalid id');
@@ -66,7 +67,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // DELETE /api/orders/:id - 刪除訂單
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', verifyToken, requireAdmin, async (req, res) => {
     const id = Number(req.params.id);
     if (isNaN(id)) {
         await addLog('WARNING', 'orders', 'Attempted to delete an order with invalid id');
