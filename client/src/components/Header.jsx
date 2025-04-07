@@ -7,7 +7,7 @@ function Header() {
   
     return (
       <div className="flex justify-between items-center p-4">
-        <Link to="/">🏠 GDSC 雛型</Link>
+        <Link to="/">🏠 全端式網頁雛型</Link>
         <div>
           {token ? (
             <>
