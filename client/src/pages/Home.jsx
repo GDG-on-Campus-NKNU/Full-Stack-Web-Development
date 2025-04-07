@@ -18,7 +18,7 @@ function Home() {
       <p className="text-gray-600">請選擇以下資料表來預覽內容（需登入）</p>
 
       <div className="space-y-2 pt-4">
-        <button onClick={() => handleGo('/browse/users')} className="text-blue-600 hover:underline">使用者資料</button><br />
+        <button onClick={() => handleGo('/browse/users')} className="text-blue-600 hover:underline">客戶資料</button><br />
         <button onClick={() => handleGo('/browse/services')} className="text-blue-600 hover:underline">服務資料</button><br />
         <button onClick={() => handleGo('/browse/orders')} className="text-blue-600 hover:underline">訂單資料</button>
       </div>

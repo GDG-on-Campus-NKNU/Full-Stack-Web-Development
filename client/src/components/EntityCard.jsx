@@ -29,7 +29,7 @@ function EntityCard({ type, data }) {
 
         return (
           <div className="border rounded p-4">
-            <p>使用者：{data.user}</p>
+            <p>客戶名稱：{data.user}</p>
             <p>服務：{data.service}</p>
             <p className="text-sm text-gray-500">{date.toLocaleDateString('en-US', options)}</p>
           </div>
