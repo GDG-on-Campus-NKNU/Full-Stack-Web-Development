@@ -1,10 +1,13 @@
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+
 function verifyToken(req, res, next) {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) return res.status(401).json({ error: "未授權" });
     try {
-      req.user = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = jwt.verify(token, 'just_a_secret');
       next();
-    } catch {
+    } catch(err){
       res.status(403).json({ error: "Token 無效" });
     }
 }

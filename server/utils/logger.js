@@ -1,4 +1,4 @@
-const db = require('../config/db');
+const db = require('../configs/db');
 
 async function addLog(log_type, module, message) {
     try {

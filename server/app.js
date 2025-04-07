@@ -21,11 +21,13 @@ const usersRouter = require('./routes/users');
 const servicesRouter = require('./routes/services');
 const ordersRouter = require('./routes/orders');
 const logsRouter = require('./routes/logs');
+const authRouter = require('./routes/auth');
 
 app.use('/api/users', usersRouter);
 app.use('/api/services', servicesRouter);
 app.use('/api/orders', ordersRouter);
 app.use('/logs', logsRouter);
+app.use('/auth', authRouter);
 
 app.listen(port, async () => {
   console.log(`伺服器啟動：http://localhost:${port}`);

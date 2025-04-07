@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import EntityCard from "../../components/EntityCard";
+import api from '../../utils/axios.js';
 
 const API_MAP = {
   users: "/api/users",
@@ -21,20 +21,25 @@ function Browse() {
 
   const fetchData = () => {
     setLoading(true);
-    axios.get(API_MAP[type])
+    api.get(API_MAP[type])
       .then(res => setData(res.data))
       .catch(err => alert("資料載入失敗：" + err.message))
       .finally(() => setLoading(false));
+    // setLoading(true);
+    // axios.get(API_MAP[type])
+    //   .then(res => setData(res.data))
+    //   .catch(err => alert("資料載入失敗：" + err.message))
+    //   .finally(() => setLoading(false));  Oldge
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(API_MAP[type], form);
+      await api.post(API_MAP[type], form);
       setForm({});
       fetchData();
     } catch (err) {
-      alert("新增失敗：" + err.message);
+      alert("新增失敗：可能是因為沒有對應的權限! \n完整錯誤訊息：" + err.message);
     }
   };
 

@@ -1,18 +1,34 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { jwtDecode } from 'jwt-decode';
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (form.email === "test@example.com" && form.password === "123456") {
-      localStorage.setItem("user", JSON.stringify(form));
-      navigate("/dashboard");
-    } else {
-      alert("登入失敗：請輸入 test@example.com / 123456");
+    if (!form.email || !form.password) {
+      alert("⚠️ 請填寫所有欄位！");
+      return;
     }
+
+    if (!/\S+@\S+\.\S+/.test(form.email)) {
+      alert("⚠️ 請輸入有效的電子郵件地址！");
+      return;
+    }
+
+    const res = await axios.post('/auth/login', form).then().catch(err => {
+      alert("⚠️ 登入失敗：" + err.response.data.error);
+      return null;
+    });
+
+    if (!res) return; // 登入失敗
+
+    localStorage.setItem("token", res.data.token);
+    localStorage.setItem("user", JSON.stringify(jwtDecode(res.data.token)));
+    navigate('/dashboard');
   };
 
   return (

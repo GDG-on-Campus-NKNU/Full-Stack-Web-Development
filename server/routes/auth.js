@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const db = require('../configs/db');
 
+require('dotenv').config();
+
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
   const [rows] = await db.query('SELECT * FROM accounts WHERE email = ?', [email]);
@@ -14,9 +16,9 @@ router.post('/login', async (req, res) => {
   if (!match) return res.status(400).json({ error: '密碼錯誤' });
 
   const token = jwt.sign(
-    { id: user.id, email: user.email, role: user.role },
-    process.env.JWT_SECRET,
-    { expiresIn: '2h' }
+    { id: user.id, email: user.email, name: user.name, role: user.role },
+   'just_a_secret',
+    { expiresIn: '1h' } 
   );
 
   res.json({ token });
@@ -32,5 +34,5 @@ router.post('/register', async (req, res) => {
     res.status(500).json({ error: '註冊失敗' });
   }
 });
-
+ 
 module.exports = router;

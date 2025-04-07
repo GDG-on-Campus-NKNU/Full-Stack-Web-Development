@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/db');
+const db = require('../configs/db');
 const { addLog } = require('../utils/logger');
 const { verifyToken, requireAdmin } = require('../middlewares/auth');
 
