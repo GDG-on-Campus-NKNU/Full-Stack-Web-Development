@@ -4,11 +4,7 @@ import Login from './pages/auth/Login';
 import Dashboard from './pages/auth/Dashboard';
 import Browse from './pages/api/Browse';
 import Header from './components/Header';
-
-function ProtectedRoute({ children }) {
-  const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/login" />;
-}
+import ProtectedRoute from './pages/ProtectedRoute';
 
 function App() {
   return (
