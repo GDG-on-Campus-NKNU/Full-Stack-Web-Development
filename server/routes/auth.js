@@ -25,10 +25,10 @@ router.post('/login', async (req, res) => {
 });
 
 router.post('/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { name, email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
   try {
-    await db.query('INSERT INTO accounts (email, password) VALUES (?, ?)', [email, hashedPassword]);
+    await db.query('INSERT INTO accounts (email, name, password) VALUES (?, ?)', [email, name, hashedPassword]);
     res.status(201).json({ message: '註冊成功' });
   } catch (error) {
     res.status(500).json({ error: '註冊失敗' });

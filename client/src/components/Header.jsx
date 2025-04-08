@@ -22,7 +22,11 @@ function Header() {
             }}>登出</button>
             </>
           ) : (
-            <Link to="/login">登入</Link>
+            <>
+            <span className="mr-4"><Link to="/login">登入</Link></span>{" "}
+            <span className="mr-4">|</span>{" "}
+            <span className="mr-4"><Link to="/register">還沒有帳號?</Link></span>{" "}
+            </>
           )}
         </div>
       </div>
