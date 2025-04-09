@@ -25,11 +25,6 @@ function Browse() {
       .then(res => setData(res.data))
       .catch(err => alert("資料載入失敗：" + err.message))
       .finally(() => setLoading(false));
-    // setLoading(true);
-    // axios.get(API_MAP[type])
-    //   .then(res => setData(res.data))
-    //   .catch(err => alert("資料載入失敗：" + err.message))
-    //   .finally(() => setLoading(false));  Oldge
   };
 
   const handleSubmit = async (e) => {
