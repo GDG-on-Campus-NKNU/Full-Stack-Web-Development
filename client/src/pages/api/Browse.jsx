@@ -84,7 +84,7 @@ function Browse() {
       </form>
 
       {loading ? (
-        <p>載入中...</p>
+        <div className="text-center text-gray-500 animate-pulse">載入中...</div>
       ) : (
         <div className="space-y-3">
           {data.map((item, i) => <EntityCard key={i} type={type} data={item} />)}

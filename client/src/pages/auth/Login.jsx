@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { jwtDecode } from 'jwt-decode';
+import toast from "react-hot-toast";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -10,27 +10,25 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!form.email || !form.password) {
-      alert("⚠️ 請填寫所有欄位！");
+      toast.error("⚠️ 請填寫所有欄位！");
       return;
     }
 
     if (!/\S+@\S+\.\S+/.test(form.email)) {
-      alert("⚠️ 請輸入有效的電子郵件地址！");
+      toast.error("⚠️ 請輸入有效的電子郵件地址！");
       return;
     }
 
-    const res = await axios.post('/auth/login', form).then().catch(err => {
-      alert("⚠️ 登入失敗：" + err.response.data.error);
-      return null;
-    });
-
-    if (!res) return; // 登入失敗
-
-    localStorage.setItem("token", res.data.token);
-    localStorage.setItem("user", JSON.stringify(jwtDecode(res.data.token)));
-    navigate('/dashboard');
+    try {
+      await axios.post('/auth/login', form, { withCredentials: true });
+      toast.success("✅ 登入成功！");
+      navigate('/dashboard');
+      window.location.reload(); // 重新載入頁面以獲取最新的使用者資訊
+    } catch (err) {
+      toast.error("⚠️ 登入失敗：" + err.response.data.error);
+    }
   };
-
+ 
   return (
     <div className="max-w-sm mx-auto p-8 bg-white rounded-lg shadow-md">
     <h1 className="text-2xl font-bold mb-6 text-center text-gray-800">登入</h1>

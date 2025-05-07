@@ -1,14 +1,25 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import api from '../../utils/axios.js';
 
 function Dashboard() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    navigate("/");
+  useEffect(() => {
+    api.get('/auth/me', {})
+      .then(res => setUser(res.data))
+      .catch(() => navigate('/login'));
+  }, []);
+
+  const handleLogout = async () => {
+    await api.post('/auth/logout');
+    navigate('/login');
   };
+
+  if (!user) {
+    return <div className="text-center">載入中...</div>;
+  }
 
   return (
     <div className="max-w-md mx-auto p-6 bg-gray-50 rounded shadow">

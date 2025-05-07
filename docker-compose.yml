@@ -1,0 +1,40 @@
+services:
+  db:
+    image: mysql:8
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: mydb
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+    ports:
+      - "3307:3306"
+    volumes:
+    - ./my_init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - appnet
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: .
+    ports:
+      - "4000:4000"
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - ./.env.production
+    volumes:
+      - ./server/uploads:/app/server/uploads  # 如果有檔案上傳資料夾
+    networks:
+      - appnet
+
+volumes:
+  db_data:
+
+networks:
+  appnet:

@@ -1,12 +1,21 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../utils/axios.js';
+import toast from 'react-hot-toast';
 
 function Home() {
-  const token = localStorage.getItem('token');
+  const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    api.get('/auth/me')
+      .then(() => setIsAuth(true))
+      .catch(() => setIsAuth(false));
+  }, []);
+
   const handleGo = (path) => {
-    if (!token) {
-      alert("⚠️ 尚未登入，請先登入後才能存取此頁面！");
+    if (!isAuth) {
+      toast.error("⚠️ 尚未登入，請先登入後才能存取此頁面！");
       return;
     }
     navigate(path);

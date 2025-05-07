@@ -7,16 +7,22 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: true
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+        secure: false, // 如果是 HTTPS，設置為 true
+        cookieDomainRewrite: 'localhost' // 確保 Cookie 的域名正確
       },
       '/auth':{
-        target: 'http://localhost:3000',
-        changeOrigin: true
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+        secure: false, // 如果是 HTTPS，設置為 true
+        cookieDomainRewrite: 'localhost' // 確保 Cookie 的域名正確
       },
       '/logs': {
-        target: 'http://localhost:3000',
-        changeOrigin: true
+        target: 'http://localhost:4000',
+        changeOrigin: true,
+        secure: false, // 如果是 HTTPS，設置為 true
+        cookieDomainRewrite: 'localhost' // 確保 Cookie 的域名正確
       }
     }
   }
